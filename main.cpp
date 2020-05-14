@@ -113,7 +113,7 @@ int main(int argc, char** argv){
 
 
 	if (argc == 1){
-		auto *uiExecutive = new G4UIExecutive(argc,argv);
+		auto *uiExecutive = new G4UIExecutive(argc,argv,"csh");
 		uiExecutive->SessionStart();
 		delete uiExecutive;
 	} else {
