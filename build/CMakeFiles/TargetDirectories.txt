@@ -1,0 +1,14 @@
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/install/strip.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/edit_cache.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/neutronSim.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/rebuild_cache.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/list_install_components.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/install/local.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/CMakeFiles/install.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/install/strip.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/install/local.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/spdlog.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/rebuild_cache.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/edit_cache.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/list_install_components.dir
+/home/gvaldivi/Sandbox/Students/Wallison/neutron-detector/build/source/3rdparty/spdlog/CMakeFiles/install.dir

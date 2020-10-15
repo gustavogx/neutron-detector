@@ -1,0 +1,8 @@
+# This is a comment and will be ignored by geant4
+#/arapuca/inputDataFile ../data/arapuca.cfg
+
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+/run/beamOn 1000000

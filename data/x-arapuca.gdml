@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<gdml xmlns:gdml="http://cern.ch/2001/Schemas/GDML"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="GDMLSchema/gdml.xsd">
+
+<!-- =========================================
+
+	The X-ARAPUCA Geometry
+	
+
+	GDML file with description of
+
+	- Materials
+	- Dimensions
+	- Geometry
+
+	GDML Manual at http://gdml.web.cern.ch/GDML/doc/GDMLmanual.pdf
+
+	version 1.0 developed by Gustavo.Valdiviesso@unifal-mg.edu.br
+
+	technote at doc-db [XXX]
+
+	Version History (latest on top)
+
+
+	v0.0
+     ========================================= -->
+
+
+
+<!--========================================================================-->
+<!--                  Global Dimensions Definitions                         -->
+<!--========================================================================-->
+
+<define>
+
+	<!-- all units of lenght are mm by default -->
+	<constant name="worldSize" value="1e3"/>
+	<position name="center"/>
+	<rotation name="identity"/>
+	<constant name="_eD_" value="1e-3"/>
+	<constant name="_Pi_" value="3.14159265359"/>
+
+	<constant name="Cos30" value="cos(30*degree)" />
+	<constant name="Cos60" value="cos(60*degree)" />
+	<constant name="Sin30" value="Cos60" />
+	<constant name="Sin60" value="Cos30" />
+	<constant name="Tan30" value="Sin30/Cos30" />
+	<constant name="Tan60" value="Sin60/Cos60" />
+
+	<rotation name="rotateP90Y" unit="deg" x="0" y="90" z="0"/>
+	<rotation name="rotateN90Y" unit="deg" x="0" y="-90" z="0"/>
+	<rotation name="rotateP90X" unit="deg" x="90" y="0" z="0"/>
+	<rotation name="rotateN90X" unit="deg" x="-90" y="0" z="0"/>
+	<rotation name="rotateN150X" unit="deg" x="-150" y="0" z="0"/>
+	<rotation name="rotateP150X" unit="deg" x="150" y="0" z="0"/>
+	<rotation name="rotateN30X" unit="deg" x="-30" y="0" z="0"/>
+	<rotation name="rotateP30X" unit="deg" x="30" y="0" z="0"/>
+	<rotation name="rotate180Y" unit="deg" x="0" y="180" z="0"/>
+	<rotation name="rotate180X" unit="deg" x="180" y="0" z="0"/>
+	<rotation name="rotate180X180Y" unit="deg" x="180" y="180" z="0"/>
+
+	<!-- Bar dimentions (mm) -->
+	<constant name="barLength" value="490"/>
+	<constant name="barWidth" value="110"/>
+	<constant name="barThickness" value="4"/>
+
+	<!-- SiPM dimentions (mm) -->
+	<constant name="sipmLength" value="6"/>
+	<constant name="sipmWidth" value="6"/>
+	<constant name="sipmThickness" value="0.1"/>
+
+</define>
+
+<!--========================================================================-->
+<!--                        Materials Definitions                           -->
+<!--========================================================================-->
+<materials>
+	<element name="hydrogen"    formula="H"  Z="1">  	<atom value="1.00794"/>   </element>
+	<element name="carbon"      formula="C"  Z="6">  	<atom value="12.0107"/>   </element>
+	<element name="nitrogen"    formula="N"  Z="7">  	<atom value="14.0067"/>   </element>
+	<element name="oxygen"      formula="O"  Z="8">  	<atom value="15.9994"/>   </element>
+	<element name="argon"       formula="Ar" Z="18"> 	<atom value="39.948"/>    </element>
+
+	<material name="Vacuum">
+		<D value="1.e-25" unit="g/cm3"/>
+		<fraction n="1.0" ref="hydrogen"/>
+	</material>
+
+  	<material name="Air">
+		<D value="0.001205" unit="g/cm3"/>
+   		<fraction n="0.781154" ref="nitrogen"/>
+   		<fraction n="0.209476" ref="oxygen"/>
+		<fraction n="0.00937"  ref="argon"/>
+	</material>
+
+    <material name="lAr">
+		<D value="1.40" unit="g/cm3"/>
+		<fraction n="1.0" ref="argon"/>
+	</material>
+
+	<material name="PVT"> <!-- Polyvinyl Toluene, base for EJ208 -->
+		<D value="1.023" unit="g/cm3"/>
+		<fraction n="0.5243" ref="hydrogen"/>
+		<fraction n="0.4757" ref="carbon"/>
+	</material>
+
+</materials>
+
+
+<!--========================================================================-->
+<!--                              WLS Bar                                   -->
+<!--========================================================================-->
+<solids>
+	<box name="boxBar" lunit="mm" x="barLength" y="barThickness" z="barWidth"/>
+</solids>
+
+<structure>
+	<volume name="volBar">
+		<materialref ref="PVT"/>
+		<solidref ref="boxBar"/>
+        <auxiliary auxtype="Color" auxvalue="cyan"/>
+	</volume>
+</structure>
+<!-- end of bar -->
+
+<!--========================================================================-->
+<!--                                SiPM                                    -->
+<!--========================================================================-->
+<solids>
+	<box name="boxSiPM" lunit="mm" x="sipmLength" y="sipmWidth" z="sipmThickness"/>
+</solids>
+
+<structure>
+	<volume name="volSiPM">
+		<materialref ref="lAr"/>
+		<solidref ref="boxSiPM"/>
+        <auxiliary auxtype="SensDet" auxvalue="sipm01"/>
+        <auxiliary auxtype="Color" auxvalue="red"/>
+    </volume>
+</structure>
+<!-- end of sipm -->
+
+
+<!--========================================================================-->
+<!--                 Presenting... the X-ARAPUCA                            -->
+<!--========================================================================-->
+<define>
+    <constant name="sipmDistance" value = "0.1"/>
+</define>
+<solids>
+	<box name="boxWorld" lunit="mm" x="worldSize" y="worldSize" z="worldSize"/>
+</solids>
+
+<structure>
+	<volume name="volWorld">
+		<materialref ref="lAr" />
+		<solidref ref="boxWorld"/>
+		<physvol>
+			<volumeref ref="volBar"/>
+		</physvol>
+		<physvol>
+			<volumeref ref="volSiPM"/>
+            <position name="sipmPos" unit="mm" x="0.0" y="0.0" z="(barWidth+sipmThickness)/2+sipmDistance"/>
+		</physvol>
+	</volume>
+</structure>
+
+<setup name="BarOnly" version="1.0">
+	<world ref="volWorld" />
+</setup>
+
+<setup name="Default" version="1.0">
+	<world ref="volWorld" />
+</setup>
+
+</gdml>
